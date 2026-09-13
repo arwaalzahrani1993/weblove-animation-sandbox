@@ -10,9 +10,14 @@ import {
   Sparkles,
 } from 'lucide-react'
 import { cockpitItems } from './copy'
+import { LevelOneLanding } from './pages/LevelOneLanding'
 
 function App() {
   const reduceMotion = useReducedMotion()
+
+  if (window.location.pathname.startsWith('/level-1')) {
+    return <LevelOneLanding />
+  }
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#080808] px-5 py-6 text-stone-100 sm:px-8 lg:px-12">
