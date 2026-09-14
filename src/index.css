@@ -24,6 +24,78 @@ body {
   min-height: 100vh;
 }
 
+.smooth-scroll-toggle {
+  position: fixed;
+  inset: auto auto 18px 18px;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid rgb(17 24 39 / 0.2);
+  border-radius: 4px;
+  background: rgb(248 250 252 / 0.94);
+  color: #111827;
+  box-shadow: 0 12px 28px rgb(31 41 55 / 0.14);
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 650;
+  cursor: pointer;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), background-color 300ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.smooth-scroll-toggle:hover {
+  transform: translateY(-2px);
+  border-color: rgb(22 71 168 / 0.5);
+  background: #ffffff;
+}
+
+.smooth-scroll-toggle:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.smooth-scroll-toggle:focus-visible {
+  outline: 3px solid rgb(231 100 80 / 0.65);
+  outline-offset: 4px;
+}
+
+.smooth-scroll-toggle[aria-pressed='true'] svg {
+  color: #1647a8;
+}
+
+.smooth-scroll-toggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+@media (prefers-color-scheme: dark) {
+  .smooth-scroll-toggle {
+    border-color: rgb(255 255 255 / 0.18);
+    background: rgb(18 24 36 / 0.94);
+    color: #f1f5f9;
+    box-shadow: 0 12px 28px rgb(0 0 0 / 0.3);
+  }
+
+  .smooth-scroll-toggle:hover {
+    border-color: rgb(231 100 80 / 0.65);
+    background: #172033;
+  }
+
+  .smooth-scroll-toggle[aria-pressed='true'] svg {
+    color: #97b8ff;
+  }
+}
+
+@media (max-width: 520px) {
+  .smooth-scroll-toggle {
+    inset: auto auto 12px 12px;
+    max-width: calc(100vw - 24px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
