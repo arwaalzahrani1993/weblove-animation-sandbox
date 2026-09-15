@@ -11,9 +11,14 @@ import {
 } from 'lucide-react'
 import { cockpitItems } from './copy'
 import { LevelOneLanding } from './pages/LevelOneLanding'
+import { LevelFiveSignature } from './pages/LevelFiveSignature'
 
 function App() {
   const reduceMotion = useReducedMotion()
+
+  if (window.location.pathname.startsWith('/level5/signature')) {
+    return <LevelFiveSignature />
+  }
 
   if (window.location.pathname.startsWith('/level-1')) {
     return <LevelOneLanding />

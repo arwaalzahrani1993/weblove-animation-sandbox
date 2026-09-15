@@ -12,6 +12,7 @@ type SmoothScrollProviderProps = {
 
 export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   const reduceMotion = useReducedMotion()
+  const hideControl = window.location.pathname.startsWith('/level5/signature')
   const [userEnabled, setUserEnabled] = useState(() => {
     return window.localStorage.getItem(STORAGE_KEY) !== 'off'
   })
@@ -56,18 +57,20 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   return (
     <>
       {children}
-      <button
-        type="button"
-        className="smooth-scroll-toggle"
-        aria-label={status}
-        aria-pressed={enabled}
-        disabled={Boolean(reduceMotion)}
-        onClick={toggleSmoothScroll}
-        title={reduceMotion ? 'أوقف تقليل الحركة من إعدادات جهازك لتجربة التمرير الناعم' : status}
-      >
-        <Waves size={17} strokeWidth={1.8} aria-hidden="true" />
-        <span>{status}</span>
-      </button>
+      {!hideControl && (
+        <button
+          type="button"
+          className="smooth-scroll-toggle"
+          aria-label={status}
+          aria-pressed={enabled}
+          disabled={Boolean(reduceMotion)}
+          onClick={toggleSmoothScroll}
+          title={reduceMotion ? 'أوقف تقليل الحركة من إعدادات جهازك لتجربة التمرير الناعم' : status}
+        >
+          <Waves size={17} strokeWidth={1.8} aria-hidden="true" />
+          <span>{status}</span>
+        </button>
+      )}
     </>
   )
 }
