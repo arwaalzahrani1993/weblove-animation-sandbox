@@ -24,6 +24,11 @@ body {
   min-height: 100vh;
 }
 
+.route-loading {
+  min-height: 100dvh;
+  background: #080808;
+}
+
 .smooth-scroll-toggle {
   position: fixed;
   inset: auto auto 18px 18px;

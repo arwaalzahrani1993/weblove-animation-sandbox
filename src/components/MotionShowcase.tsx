@@ -13,11 +13,11 @@ const sceneTransition = {
 function Scene({ index }: { index: number }) {
   if (index === 0) {
     return (
-      <motion.div className="cinema-scene cinema-intro" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={sceneTransition}>
+      <motion.div className="cinema-scene cinema-intro" initial={false} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={sceneTransition}>
         <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ ...sceneTransition, delay: 0.15 }}>
           الحركة النظيفة ما تحتاج زحمة.
         </motion.p>
-        <motion.h1 initial={{ opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ ...sceneTransition, delay: 0.28 }}>
+        <motion.h1 initial={{ y: 24 }} animate={{ y: 0 }} transition={{ ...sceneTransition, delay: 0.08 }}>
           لحظة واحدة.<br /><span>وتثبت.</span>
         </motion.h1>
       </motion.div>
@@ -140,9 +140,17 @@ export function MotionShowcase() {
           <Scene key={scene} index={scene} />
         </AnimatePresence>
 
-        <div className="cinema-progress" aria-label={`المشهد ${scene + 1} من ${SCENE_COUNT}`}>
+        <div
+          className="cinema-progress"
+          role="progressbar"
+          aria-label="تقدم العرض"
+          aria-valuemin={1}
+          aria-valuemax={SCENE_COUNT}
+          aria-valuenow={scene + 1}
+          aria-valuetext={`المشهد ${scene + 1} من ${SCENE_COUNT}`}
+        >
           {Array.from({ length: SCENE_COUNT }).map((_, index) => (
-            <span key={index} className={index === scene ? 'is-active' : index < scene ? 'is-complete' : ''} />
+            <span key={index} aria-hidden="true" className={index === scene ? 'is-active' : index < scene ? 'is-complete' : ''} />
           ))}
         </div>
 
