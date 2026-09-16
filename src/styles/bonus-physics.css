@@ -1,0 +1,222 @@
+.physics-page {
+  --physics-bg: #090a08;
+  --physics-ink: #f0eee7;
+  --physics-muted: #96998d;
+  --physics-accent: #d7ff3f;
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: var(--physics-bg);
+  color: var(--physics-ink);
+  font-family: "Avenir Next", "SF Arabic", "Geeza Pro", Tahoma, sans-serif;
+}
+
+.physics-page::before {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background-image:
+    linear-gradient(rgb(240 238 231 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(240 238 231 / 0.045) 1px, transparent 1px);
+  background-size: 52px 52px;
+  content: '';
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+  pointer-events: none;
+}
+
+.physics-page::after {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  background: radial-gradient(circle at 50% 50%, transparent 46%, rgb(0 0 0 / 0.5));
+  content: '';
+  pointer-events: none;
+}
+
+.physics-nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 72px;
+  padding-inline: clamp(1rem, 4vw, 4rem);
+  border-bottom: 1px solid rgb(240 238 231 / 0.14);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.physics-nav a {
+  justify-self: start;
+  color: var(--physics-ink);
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+}
+
+.physics-nav span {
+  color: var(--physics-accent);
+}
+
+.physics-nav p {
+  justify-self: end;
+  margin: 0;
+  color: var(--physics-muted);
+  letter-spacing: 0;
+}
+
+.physics-nav a:focus-visible,
+.physics-reset:focus-visible {
+  outline: 3px solid var(--physics-accent);
+  outline-offset: 4px;
+}
+
+.physics-stage {
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.physics-stage canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100% !important;
+  height: 100% !important;
+  touch-action: none;
+  cursor: grab;
+}
+
+.physics-stage canvas:active {
+  cursor: grabbing;
+}
+
+.physics-copy {
+  position: absolute;
+  top: clamp(7rem, 17vh, 10rem);
+  right: clamp(1rem, 4vw, 4rem);
+  z-index: 3;
+  max-width: min(48rem, 74vw);
+  pointer-events: none;
+}
+
+.physics-copy p {
+  margin: 0 0 1.2rem;
+  color: var(--physics-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.physics-copy h1 {
+  margin: 0;
+  font-size: clamp(3.8rem, 9.8vw, 10rem);
+  font-weight: 720;
+  letter-spacing: -0.075em;
+  line-height: 0.88;
+  text-wrap: balance;
+}
+
+.physics-instructions {
+  position: absolute;
+  bottom: 2rem;
+  left: clamp(1rem, 4vw, 4rem);
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--physics-muted);
+  font-size: 0.75rem;
+  font-weight: 650;
+  pointer-events: none;
+}
+
+.physics-reset {
+  position: absolute;
+  right: clamp(1rem, 4vw, 4rem);
+  bottom: 1.2rem;
+  z-index: 8;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 48px;
+  padding: 0.8rem 1.1rem;
+  border: 1px solid var(--physics-ink);
+  border-radius: 2px;
+  background: var(--physics-ink);
+  color: var(--physics-bg);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 220ms ease, color 220ms ease, transform 220ms ease;
+}
+
+.physics-reset:hover {
+  border-color: var(--physics-accent);
+  background: var(--physics-accent);
+  transform: translateY(-3px);
+}
+
+.physics-reset:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.physics-accessible-copy {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 680px) {
+  .physics-page::before {
+    background-size: 34px 34px;
+  }
+
+  .physics-nav {
+    grid-template-columns: 1fr auto;
+    height: 64px;
+    padding-inline: 1rem;
+  }
+
+  .physics-nav span {
+    display: none;
+  }
+
+  .physics-copy {
+    top: 6.2rem;
+    right: 1rem;
+    max-width: calc(100vw - 2rem);
+  }
+
+  .physics-copy h1 {
+    max-width: 7.6ch;
+    font-size: clamp(3.7rem, 17vw, 6rem);
+    line-height: 0.92;
+  }
+
+  .physics-instructions {
+    right: 1rem;
+    bottom: 5.5rem;
+    left: auto;
+  }
+
+  .physics-reset {
+    right: 1rem;
+    bottom: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .physics-reset {
+    transition: none;
+  }
+}
